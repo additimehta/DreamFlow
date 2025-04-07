@@ -1,0 +1,115 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Mode Colors */
+    --background: 350 100% 98%; /* Very light baby pink */
+    --foreground: 340 60% 30%; /* Deep rose for text contrast */
+
+    --primary: 350 100% 75%; /* Soft pink primary */
+    --primary-foreground: 340 60% 30%;
+
+    --secondary: 195 80% 55%; /* Soft blue secondary */
+    --secondary-foreground: 210 50% 20%;
+
+    --muted: 350 50% 90%; /* Light muted pink */
+    --muted-foreground: 340 30% 40%;
+
+    --accent: 270 70% 85%; /* Soft lavender accent */
+    --accent-foreground: 270 50% 20%;
+
+    --card: 0 0% 100%; /* Pure white cards */
+    --card-foreground: 340 60% 30%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 340 60% 30%;
+
+    --border: 350 50% 90%;
+    --input: 350 50% 90%;
+    --ring: 350 100% 75%;
+    
+    --radius: 1rem;
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark Mode Colors (using the blue scheme you provided) */
+    --background: 220 50% 20%; /* Darker blue background */
+    --foreground: 210 80% 95%; /* Lighter text for contrast */
+
+    --primary: 195 80% 55%; /* More vibrant blue primary color */
+    --primary-foreground: 210 50% 20%;
+
+    --secondary: 350 100% 75%; /* More vibrant pink secondary color */
+    --secondary-foreground: 340 60% 30%;
+
+    --muted: 210 30% 30%; /* Darker muted background */
+    --muted-foreground: 210 20% 80%;
+
+    --accent: 270 70% 70%; /* More vibrant accent color */
+    --accent-foreground: 270 50% 20%;
+
+    /* Other colors remain similar to keep consistency */
+    --card: 220 40% 15%;
+    --card-foreground: 210 80% 95%;
+    --popover: 220 40% 15%;
+    --popover-foreground: 210 80% 95%;
+    --border: 214 30% 22%;
+    --input: 214 30% 22%;
+    --ring: 222 80% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .dreamy-card {
+    @apply bg-white/70 dark:bg-card/70 backdrop-blur-md rounded-2xl shadow-dreamy border border-opacity-20 border-babyBlue dark:border-blue-900/20 p-6 transition-all duration-300 hover:shadow-dreamy-hover;
+  }
+  
+  .dreamy-input {
+    @apply bg-white/60 dark:bg-card/60 border border-babyBlue/30 dark:border-blue-900/30 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-babyPink/50 dark:focus:ring-primary/50 transition-all duration-300;
+  }
+  
+  .dreamy-button {
+    @apply bg-gradient-to-r from-babyPink to-babyBlue dark:from-primary dark:to-blue-700 text-white font-medium rounded-full px-6 py-2 shadow-sm hover:shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-babyPink/50 dark:focus:ring-primary/50;
+  }
+
+  .calendar-day {
+    @apply rounded-full w-10 h-10 flex items-center justify-center transition-all duration-200;
+  }
+}
+
+/* Animation for floating elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
