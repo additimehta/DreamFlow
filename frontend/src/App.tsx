@@ -8,36 +8,63 @@ import Layout from "./components/Layout";
 import TimerPage from "./pages/TimerPage";
 import CalendarPage from "./pages/CalendarPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <Layout>
-              <TimerPage />
-            </Layout>
-          } />
-          <Route path="/calendar" element={
-            <Layout>
-              <CalendarPage />
-            </Layout>
-          } />
-          <Route path="/projects" element={
-            <Layout>
-              <ProjectsPage />
-            </Layout>
-          } />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={
+              <Layout>
+                <HomePage />
+              </Layout>
+            } />
+            <Route path="/login" element={
+              <Layout>
+                <LoginPage />
+              </Layout>
+            } />
+            <Route path="/signup" element={
+              <Layout>
+                <SignupPage />
+              </Layout>
+            } />
+            <Route path="/timer" element={
+              <Layout>
+                <ProtectedRoute>
+                  <TimerPage />
+                </ProtectedRoute>
+              </Layout>
+            } />
+            <Route path="/calendar" element={
+              <Layout>
+                <ProtectedRoute>
+                  <CalendarPage />
+                </ProtectedRoute>
+              </Layout>
+            } />
+            <Route path="/projects" element={
+              <Layout>
+                <ProtectedRoute>
+                  <ProjectsPage />
+                </ProtectedRoute>
+              </Layout>
+            } />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
@@ -15,7 +14,7 @@ interface Event {
   id: string;
   title: string;
   date: Date;
-  project: string;
+  description: string;
   time: string;
 }
 
@@ -37,35 +36,35 @@ const CalendarPage: React.FC = () => {
         id: '1',
         title: 'Website Design', 
         date: addDays(new Date(), 1), 
-        project: 'Client Project',
+        description: 'Client Project',
         time: '2h 30m'
       },
       { 
         id: '2',
         title: 'API Integration', 
         date: addDays(new Date(), 3), 
-        project: 'Personal Project',
+        description: 'Personal Project',
         time: '1h 45m'
       },
       { 
         id: '3',
         title: 'Team Meeting', 
         date: new Date(), 
-        project: 'Internal',
+        description: 'Internal',
         time: '1h'
       },
       { 
         id: '4',
         title: 'Code Review', 
         date: addDays(new Date(), -1), 
-        project: 'Client Project',
+        description: 'Client Project',
         time: '45m'
       },
       { 
         id: '5',
         title: 'Feature Planning', 
         date: addDays(new Date(), 5), 
-        project: 'Client Project',
+        description: 'Client Project',
         time: '2h'
       },
     ];
@@ -75,7 +74,7 @@ const CalendarPage: React.FC = () => {
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
   const [newEvent, setNewEvent] = useState({
     title: '',
-    project: '',
+    description: '',
     time: ''
   });
 
@@ -144,13 +143,13 @@ const CalendarPage: React.FC = () => {
     const event: Event = {
       id: Date.now().toString(),
       title: newEvent.title,
-      project: newEvent.project || 'Unassigned',
+      description: newEvent.description || 'Unassigned',
       time: newEvent.time || '1h',
       date: new Date(date)
     };
 
     setEvents([...events, event]);
-    setNewEvent({ title: '', project: '', time: '' });
+    setNewEvent({ title: '', description: '', time: '' });
     setIsAddEventOpen(false);
     toast.success('Event added successfully');
   };
@@ -249,12 +248,10 @@ const CalendarPage: React.FC = () => {
                   onSelect={(newDate) => newDate && setDate(newDate)}
                   className="rounded-2xl"
                   classNames={{
-                    day_selected: cn(
-                      "bg-babyBlue text-primary-foreground hover:bg-babyBlue hover:text-primary-foreground focus:bg-babyBlue focus:text-primary-foreground rounded-full"
-                    ),
-                    day_today: cn(
-                      "bg-babyPink/20 text-foreground rounded-full"
-                    ),
+                    day_selected: "bg-babyBlue text-primary-foreground hover:bg-babyBlue hover:text-primary-foreground focus:bg-babyBlue focus:text-primary-foreground rounded-full",
+                    day_today: "bg-babyPink/20 text-foreground rounded-full",
+                    cell: "h-9 w-9 text-center text-sm p-0 relative focus-within:relative focus-within:z-20",
+                    day: "h-9 w-9 p-0 font-normal aria-selected:opacity-100 rounded-full",
                   }}
                 />
               </div>
@@ -291,13 +288,13 @@ const CalendarPage: React.FC = () => {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="project">Project</Label>
+                        <Label htmlFor="description">Description</Label>
                         <Input 
-                          id="project"
+                          id="description"
                           className="dreamy-input w-full" 
-                          value={newEvent.project}
-                          onChange={(e) => setNewEvent({...newEvent, project: e.target.value})}
-                          placeholder="Enter project name (optional)"
+                          value={newEvent.description}
+                          onChange={(e) => setNewEvent({...newEvent, description: e.target.value})}
+                          placeholder="Enter a description (optional)"
                         />
                       </div>
                       <div className="space-y-2">
@@ -325,7 +322,7 @@ const CalendarPage: React.FC = () => {
                   getEventsForDay(date).map((event, i) => (
                     <div 
                       key={i} 
-                      className="p-3 rounded-2xl bg-white/70 border border-babyBlue/30 shadow-sm transition-all duration-200 hover:shadow-md relative group"
+                      className="p-3 rounded-2xl bg-white/70 dark:bg-black/30 border border-babyBlue/30 shadow-sm transition-all duration-200 hover:shadow-md relative group"
                     >
                       <div className="flex justify-between items-start mb-1">
                         <h3 className="font-medium text-foreground pr-6">{event.title}</h3>
@@ -333,7 +330,7 @@ const CalendarPage: React.FC = () => {
                           {event.time}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">{event.project}</p>
+                      <p className="text-sm text-foreground/80 dark:text-foreground/90">{event.description}</p>
                       <button 
                         className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-destructive hover:text-destructive/80"
                         onClick={() => handleRemoveEvent(event.id)}
