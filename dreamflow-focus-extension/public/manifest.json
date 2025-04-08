@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "DreamFlow Focus Mode",
+    "version": "1.0",
+    "description": "Detects distractions and gives gentle nudges to refocus.",
+    "permissions": ["tabs", "scripting", "activeTab"],
+    "background": {
+      "service_worker": "dist/background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["dist/content.js"]
+      }
+    ],
+    "action": {
+      "default_title": "DreamFlow Focus Mode"
+    }
+  }
+  

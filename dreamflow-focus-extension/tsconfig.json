@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                // Compile to modern JS
+    "module": "ESNext",             // Supports import/export
+    "outDir": "dist",               // Output directory for compiled JS
+    "rootDir": "src",               // Source TS files live here
+    "strict": true,                 // Enable all strict type-checking
+    "esModuleInterop": true,        // Allow default imports from CommonJS
+    "moduleResolution": "node",     // Module resolution strategy
+    "skipLibCheck": true            // Speeds up build, ignore .d.ts type errors
+  },
+  "include": ["src"]
+}
