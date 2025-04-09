@@ -71,7 +71,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-background text-foreground font-inter bg-gradient-to-br from-primary/20 via-background to-secondary/20 dark:from-primary/10 dark:via-background dark:to-secondary/10 animate-background-shift">
       <Header />
-      <main className="container mx-auto py-8 px-4 md:px-6">
+      <main className="w-full px-4 md:px-6 lg:px-8 xl:px-12">
         {children}
       </main>
       
